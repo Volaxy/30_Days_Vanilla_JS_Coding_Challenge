@@ -70,81 +70,64 @@
 
     <script>
         const $buttons = document.querySelectorAll("button[data-key]");
-        const miliseconds = 50;
         
         $buttons.forEach($button => $button.addEventListener("keypress", event => {
             if(event.keyCode === 13 || event.keyCode === 32) {
-                const $audio = document.querySelector(`audio[data-key="${$button.dataset.key}"]`);
-
-                $button.classList.add("playing");
-
-                $audio.play();
-
-                $buttons.forEach($button => {
-                    setTimeout(() => {
-                        $button.classList.remove("playing");
-                    }, miliseconds);
-                });
+                playSound($button);
             }
         }));
 
+        $buttons.forEach($button => $button.addEventListener("transitionend", () => $button.classList.remove("playing")));
+        
         window.addEventListener("keypress", event => {
             if(event.keyCode !== 13 && event.keyCode !== 32) {
+                let $button;
                 let $audio;
                 switch (event.key) {
                     case "a":
-                        document.querySelector("button[data-key='65']").classList.add("playing");
+                        $button = document.querySelector("button[data-key='65']");
+                        playSound($button);
 
-                        $audio = document.querySelector("audio[data-key='65']");
-                        $audio.play();
                         break;
                     case "s":
-                        document.querySelector("button[data-key='83']").classList.add("playing");
+                        $button = document.querySelector("button[data-key='83']");
+                        playSound($button);
 
-                        $audio = document.querySelector("audio[data-key='83']");
-                        $audio.play();
                         break;
                     case "d":
-                        document.querySelector("button[data-key='68']").classList.add("playing");
+                        $button = document.querySelector("button[data-key='68']");
+                        playSound($button);
 
-                        $audio = document.querySelector("audio[data-key='68']");
-                        $audio.play();
                         break;
                     case "f":
-                        document.querySelector("button[data-key='70']").classList.add("playing");
+                        $button = document.querySelector("button[data-key='70']");
+                        playSound($button);
 
-                        $audio = document.querySelector("audio[data-key='70']");
-                        $audio.play();
                         break;
                     case "g":
-                        document.querySelector("button[data-key='71']").classList.add("playing");
+                        $button = document.querySelector("button[data-key='71']");
+                        playSound($button);
 
-                        $audio = document.querySelector("audio[data-key='71']");
-                        $audio.play();
                         break;
                     case "h":
-                        document.querySelector("button[data-key='72']").classList.add("playing");
+                        $button = document.querySelector("button[data-key='72']");
+                        playSound($button);
 
-                        $audio = document.querySelector("audio[data-key='72']");
-                        $audio.play();
                         break;
                     case "j":
-                        document.querySelector("button[data-key='74']").classList.add("playing");
+                        $button = document.querySelector("button[data-key='74']");
+                        playSound($button);
 
-                        $audio = document.querySelector("audio[data-key='74']");
-                        $audio.play();
                         break;
                     case "k":
-                        document.querySelector("button[data-key='75']").classList.add("playing");
+                        $button = document.querySelector("button[data-key='75']");
+                        playSound($button);
 
-                        $audio = document.querySelector("audio[data-key='75']");
-                        $audio.play();
                         break;
                     case "l":
-                        document.querySelector("button[data-key='76']").classList.add("playing");
+                        $button = document.querySelector("button[data-key='76']");
+                        playSound($button);
 
-                        $audio = document.querySelector("audio[data-key='76']");
-                        $audio.play();
                         break;
                     default:
                         break;
@@ -152,16 +135,13 @@
             }
         });
 
-        window.addEventListener("keypress", event => {
-            if(event.keyCode !== 13 && event.keyCode !== 32) {
-                const $buttons = document.querySelectorAll("button[data-key]");
-                $buttons.forEach($button => {
-                    setTimeout(() => {
-                        $button.classList.remove("playing");
-                    }, miliseconds);
-                });
-            }
-        });
+        function playSound($button) {
+            $button.classList.add("playing");
+
+            $audio = document.querySelector(`audio[data-key="${$button.dataset.key}"]`);
+            $audio.currentTime = 0;
+            $audio.play();
+        }
     </script>
 </body>
 
