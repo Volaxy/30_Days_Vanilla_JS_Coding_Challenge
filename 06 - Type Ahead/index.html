@@ -9,17 +9,43 @@
 </head>
 
 <body>
-
     <form class="search-form">
-        <input type="text" class="search" placeholder="City or State">
+        <input type="text" class="search" placeholder="City or State" oninput="searchWord()">
+
         <ul class="suggestions">
             <li>Filter for a city</li>
             <li>or a state</li>
         </ul>
     </form>
+
     <script>
         const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+        const allCities = [];
+
+        fetch(endpoint)
+            .then(response => response.json())
+            .then(data => {
+                allCities.push(...data);
+            })
+            .catch(error => {
+                console.log("Occured an error! :(");
+            });
+
+        const $input = document.querySelector(".search");
+        function searchWord() {
+            const searchString = $input.value.toLowerCase();
+            const filteredCities = allCities.filter(city => city.city.toLowerCase().includes(searchString) || city.state.toLowerCase().includes(searchString));
+
+            const $list = document.querySelector(".suggestions");
+            $list.replaceChildren();
+            filteredCities.forEach(city => {
+                const $li = document.createElement("li");
+                $li.innerHTML = `<span>${city.city}, ${city.state}</span> <span>${Number(city.population).toLocaleString("en-US")}</span>`;
+
+                $list.appendChild($li);
+            });
+        }
     </script>
 </body>
 
