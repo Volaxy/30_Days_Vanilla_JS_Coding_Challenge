@@ -53,11 +53,10 @@
         }
     </style>
     <!--
-   The following is a common layout you would see in an email client.
+        The following is a common layout you would see in an email client.
 
-   When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
-
-  -->
+        When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
+    -->
     <div class="inbox">
         <div class="item">
             <input type="checkbox">
@@ -98,6 +97,25 @@
     </div>
 
     <script>
+        const $checkboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
+        $checkboxes.forEach(($checkbox, key, elements) => {
+            $checkbox.addEventListener("click", event => {
+                if(event.shiftKey) {
+                    // PREVIOUS
+                    const $previousCheckboxes = elements.slice(0, key);
+                    const previousCheckedCheckboxIndex = $previousCheckboxes.findIndex($checkbox => $checkbox.checked);
+
+                    elements.slice(previousCheckedCheckboxIndex, key).forEach($checkbox => $checkbox.checked = true);
+                    
+                    // LATEST
+                    const $lastCheckboxes = elements.slice(key + 1);
+                    const lastCheckedCheckbox = $lastCheckboxes.find($checkbox => $checkbox.checked);
+                    const lastCheckedCheckboxIndex = elements.findIndex($checkbox => $checkbox === lastCheckedCheckbox);
+
+                    elements.slice(key, lastCheckedCheckboxIndex).forEach($checkbox => $checkbox.checked = true);
+                }
+            })
+        });
     </script>
 </body>
 
