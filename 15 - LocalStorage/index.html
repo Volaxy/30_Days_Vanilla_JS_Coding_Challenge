@@ -44,13 +44,67 @@
     </div>
 
     <script>
-        const addItems = document.querySelector('.add-items');
-        const itemsList = document.querySelector('.plates');
-        const items = [];
+        const $addItems = document.querySelector('.add-items');
+        const $itemsList = document.querySelector('.plates');
+        const items = JSON.parse(localStorage.getItem("items")) || [];
 
+        fillItemsList();
+
+        $addItems.addEventListener("submit", event => {
+            event.preventDefault();
+
+            const value = document.querySelector("[name='item']").value;
+            items.push(new Item(value));
+
+            saveItems();
+            fillItemsList();
+
+            $addItems.reset();
+        });
+
+        class Item {
+            name;
+            checked = false;
+
+            constructor(name) {
+                this.name = name;
+            }
+        };
+
+        function createCheckItem(newItem) {
+            const $item = document.createElement("li");
+
+            const $checkbox = document.createElement("input");
+            $checkbox.setAttribute("id", newItem.name);
+            $checkbox.setAttribute("type", "checkbox");
+            newItem.checked ? $checkbox.setAttribute("checked", "") : "";
+            $checkbox.addEventListener("change", () => {
+                const item = items.find(item => item.name === newItem.name);
+
+                item.checked = !item.checked;
+                
+                saveItems();
+                fillItemsList();
+            });
+
+            const $label = document.createElement("label");
+            $label.setAttribute("for", newItem.name);
+            $label.innerText = newItem.name;
+
+            $item.append($checkbox, $label);
+
+            return $item;
+        }
+
+        function saveItems() {
+            localStorage.setItem("items", JSON.stringify(items));
+        }
+
+        function fillItemsList() {
+            $itemsList.innerHTML = "";
+            items.forEach(item => $itemsList.appendChild(createCheckItem(item)));
+        }
     </script>
-
-
 </body>
 
 </html>
