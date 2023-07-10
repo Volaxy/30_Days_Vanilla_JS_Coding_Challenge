@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
     <div class="hero">
         <h1 contenteditable>🔥WOAH!</h1>
     </div>
@@ -38,6 +37,28 @@
     </style>
 
     <script>
+        const $hero = document.querySelector(".hero");
+        $hero.addEventListener("mousemove", event => {
+            const textPositionX = $hero.offsetWidth / 2;
+            const textPositionY = $hero.offsetHeight / 2;
+
+            let shadowX = textPositionX - event.layerX;
+            let shadowY = textPositionY - event.layerY;
+            const max = 50;
+
+            shadowX > max ? shadowX = max : "";
+            shadowX < -max ? shadowX = -max : "";
+            shadowY > max ? shadowY = max : "";
+            shadowY < -max ? shadowY = -max : "";
+
+            const $title = document.querySelector("[contenteditable]");
+            $title.style.textShadow = `
+                ${shadowX}px ${shadowY}px 0 rgba(0, 0, 255, 1),
+                ${-shadowX}px ${shadowY}px 0 rgba(255, 0, 255, 1),
+                ${shadowX}px ${-shadowY}px 0 rgba(0, 255, 255, 1),
+                ${-shadowX}px ${-shadowY}px 0 rgba(0, 255, 0, 1)
+            `;
+        });
     </script>
 </body>
 
