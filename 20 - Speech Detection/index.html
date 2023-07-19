@@ -15,7 +15,34 @@
     <script>
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+        const recognition = new SpeechRecognition();
 
+        recognition.interimResults = true;
+
+        recognition.lang = "pt-Br";
+        recognition.start();
+
+        recognition.addEventListener("result", onSpeak);
+
+
+        const $words = document.querySelector(".words");
+
+        let $p = document.createElement("p");
+        function onSpeak(event) {
+            const sentence = Array.from(event.results)
+                .map(result => result[0])
+                .map(result => result.transcript)
+                .join("");
+
+            $p.innerText = sentence;
+            $words.appendChild($p);
+        }
+
+        recognition.addEventListener("end", () => {
+            $p = document.createElement("p");
+            
+            recognition.start();
+        });
     </script>
 
 
