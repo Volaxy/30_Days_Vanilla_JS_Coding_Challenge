@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <div class="highlight pill"></div>
 
     <nav>
         <ul class="menu">
@@ -34,7 +35,24 @@
     </div>
 
     <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+        const $pill = document.querySelector(".pill");
+        const $wraper = document.querySelector(".wrapper");
+
+        const $links = document.querySelectorAll("a");
+        $links.forEach($link => {
+            $link.addEventListener("mouseover", event => {
+                $pill.style.width = `${$link.offsetWidth}px`;
+                $pill.style.height = `${$link.offsetHeight}px`;
+
+                if($link.offsetParent != $wraper) {
+                    $pill.style.top = `${$link.offsetTop}px`;
+                    $pill.style.left = `${$link.offsetLeft}px`;
+                } else {
+                    $pill.style.top = `${$link.offsetTop + $wraper.offsetTop}px`;
+                    $pill.style.left = `${$link.offsetLeft + $wraper.offsetLeft}px`;
+                }
+            });
+        });
     </script>
 </body>
 
