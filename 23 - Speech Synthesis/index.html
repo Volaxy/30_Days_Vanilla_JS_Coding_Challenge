@@ -10,36 +10,56 @@
 </head>
 
 <body>
-
     <div class="voiceinator">
-
         <h1>The Voiceinator 5000</h1>
 
-        <select name="voice" id="voices">
-            <option value="">Select A Voice</option>
-        </select>
-
         <label for="rate">Rate:</label>
-        <input name="rate" type="range" min="0" max="3" value="1" step="0.1">
+        <input name="rate" type="range" min="0" max="3" value="1" step="0.1" oninput="changeRate(this)">
 
         <label for="pitch">Pitch:</label>
+        <input name="pitch" type="range" min="0" max="2" step="0.1" oninput="changePitch(this)">
 
-        <input name="pitch" type="range" min="0" max="2" step="0.1">
-        <textarea name="text">Hello! I love JavaScript 👍</textarea>
-        <button id="stop">Stop!</button>
-        <button id="speak">Speak</button>
+        <textarea name="text" oninput="changeText(this)">Hello! I love JavaScript 👍</textarea>
 
+        <button id="stop" onclick="stopSpeaking()">Stop!</button>
+        <button id="speak" onclick="speak()">Speak</button>
     </div>
 
     <script>
         const msg = new SpeechSynthesisUtterance();
-        let voices = [];
-        const voicesDropdown = document.querySelector('[name="voice"]');
         const options = document.querySelectorAll('[type="range"], [name="text"]');
         const speakButton = document.querySelector('#speak');
         const stopButton = document.querySelector('#stop');
-    </script>
 
+        msg.text = options[2].value;
+        msg.lang = "en-US";
+
+        function changePitch($input) {
+            msg.pitch = parseFloat($input.value);
+
+            speak();
+        }
+
+        function changeRate($input) {
+            msg.rate = parseFloat($input.value);
+
+            speak();
+        }
+
+        function changeText($input) {
+            msg.text = $input.value;
+        }
+
+        function speak() {
+            speechSynthesis.cancel();
+            
+            speechSynthesis.speak(msg);
+        }
+
+        function stopSpeaking() {
+            speechSynthesis.speaking ? speechSynthesis.cancel() : "";
+        }
+    </script>
 </body>
 
 </html>
