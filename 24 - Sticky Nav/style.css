@@ -16,6 +16,10 @@ body {
     box-sizing: inherit;
 }
 
+#main {
+    position: sticky;
+}
+
 .site-wrap {
     max-width: 700px;
     margin: 70px auto;
@@ -50,6 +54,7 @@ nav {
     transition: all 0.5s;
     position: relative;
     z-index: 1;
+    transform: translateY(-1px);
 }
 
 nav ul {
