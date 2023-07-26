@@ -47,7 +47,14 @@
 
     <button></button>
     <script>
+        function click(event) {
+            console.log(this);
 
+            event.stopPropagation();
+        }
+
+        const $divs = document.querySelectorAll("div");
+        $divs.forEach($div => $div.addEventListener("click", click, { capture: true, once: true }));
     </script>
 </body>
 
