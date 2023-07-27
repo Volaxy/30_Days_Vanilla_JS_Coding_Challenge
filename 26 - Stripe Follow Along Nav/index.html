@@ -17,6 +17,7 @@
         <ul class="cool">
             <li>
                 <a href="#">About Me</a>
+
                 <div class="dropdown dropdown1">
                     <div class="bio">
                         <img src="https://logo.clearbit.com/wesbos.com">
@@ -25,8 +26,10 @@
                     </div>
                 </div>
             </li>
+
             <li>
                 <a href="#">Courses</a>
+
                 <ul class="dropdown courses">
                     <li>
                         <span class="code">RFB</span>
@@ -66,8 +69,10 @@
                     </li>
                 </ul>
             </li>
+
             <li>
                 <a href="#">Other Links</a>
+
                 <ul class="dropdown dropdown3">
                     <li><a class="button" href="http://twitter.com/wesbos">Twitter</a></li>
                     <li><a class="button" href="http://facebook.com/wesbos.developer">Facebook</a></li>
@@ -163,7 +168,7 @@
             background: #fff;
             border-radius: 4px;
             box-shadow: 0 50px 100px rgba(50, 50, 93, .1), 0 15px 35px rgba(50, 50, 93, .15), 0 5px 15px rgba(0, 0, 0, .1);
-            transition: all 0.3s, opacity 0.1s, transform 0.2s;
+            transition: all 0.3s, opacity 0.2s, transform 0.2s;
             transform-origin: 50% 0;
             display: flex;
             justify-content: center;
@@ -234,8 +239,36 @@
     </style>
 
     <script>
-    </script>
+        const $dropdownBackground = document.querySelector(".dropdownBackground");
+        const $coolContainer = document.querySelector(".cool");
+        const $coolItens = document.querySelectorAll(".cool > li");
 
+        $coolContainer.addEventListener("mouseover", () => {
+            $coolContainer.classList.add("trigger-enter");
+        });
+        $coolContainer.addEventListener("mouseleave", () => {
+            $coolContainer.classList.remove("trigger-enter");
+        });
+
+        $coolItens.forEach($coolItem => {
+            $coolItem.addEventListener("mouseover", () => {
+                $dropdownBackground.classList.add("open");
+
+                const dropdownMeasures = $coolItem.lastElementChild.getBoundingClientRect();
+
+                $dropdownBackground.style.top = `${dropdownMeasures.y - $coolContainer.getBoundingClientRect().top}px`;
+                $dropdownBackground.style.left = `${dropdownMeasures.x}px`;
+
+                $dropdownBackground.style.width = `${dropdownMeasures.width}px`;
+                $dropdownBackground.style.height = `${dropdownMeasures.height}px`;
+            });
+
+            $coolItem.addEventListener("mouseleave", () => {
+                $dropdownBackground.classList.remove("open");
+                $coolItem.classList.remove("trigger-enter-active");
+            });
+        });
+    </script>
 </body>
 
 </html>
