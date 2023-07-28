@@ -38,8 +38,31 @@
     </div>
 
     <script>
-    </script>
+        let isMouseDown = false;
+        let before;
+        
+        const $itemsContainer = document.querySelector(".items");
+        $itemsContainer.addEventListener("mousedown", event => {
+            $itemsContainer.classList.add("active");
+            before = event.clientX;
+            isMouseDown = true;
+        });
 
+        $itemsContainer.addEventListener("mousemove", event => isMouseDown && scrollItemsContainerHandler(event));
+        
+        function scrollItemsContainerHandler(event) {
+            let toRight = before > event.clientX ? true : false;
+            before = event.clientX;
+            
+            $itemsContainer.scrollLeft += toRight ? 25 : -25;
+        }
+        
+        $itemsContainer.addEventListener("mouseup", () => {
+            isMouseDown = false;
+            $itemsContainer.classList.remove("active");
+        });
+        $itemsContainer.addEventListener("mouseleave", () => isMouseDown = false);
+    </script>
 </body>
 
 </html>
