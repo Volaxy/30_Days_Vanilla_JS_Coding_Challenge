@@ -23,6 +23,45 @@ h1 {
     margin-bottom: 0;
 }
 
+h2 {
+    text-align: center;
+    font-size: 6rem;
+    line-height: 1;
+    margin-bottom: 0;
+}
+
+button {
+    background-color: #01bf00;
+
+    display: block;
+
+    margin: auto;
+    margin-top: 2rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px black;
+    padding: 1rem 3rem;
+
+    font-size: 4em;
+    font-family: 'Amatic SC', cursive;
+
+    cursor: pointer;
+}
+
+    button:focus {
+        background-color: #008a00;
+
+        transform: scale(0.95);
+    }
+
+    button:disabled {
+        background-color: #a3a3a3;
+    }
+
+.last-seconds {
+    color: red;
+}
+
 .score {
     background: rgba(255, 255, 255, 0.2);
     padding: 0 3rem;
@@ -64,6 +103,7 @@ h1 {
     width: 100%;
     height: 100%;
     transition: all 0.4s;
+    cursor: pointer;
 }
 
 .hole.up .mole {

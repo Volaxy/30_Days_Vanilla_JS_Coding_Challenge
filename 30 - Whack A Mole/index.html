@@ -12,6 +12,7 @@
 <body>
 
     <h1>Whack-a-mole! <span class="score">0</span></h1>
+    <h2>Timer: <span class="timer">10</span></h2>
     <button onClick="startGame()">Start!</button>
 
     <div class="game">
@@ -40,6 +41,72 @@
         const scoreBoard = document.querySelector('.score');
         const moles = document.querySelectorAll('.mole');
 
+        let score = 0;
+        moles.forEach(mole => mole.addEventListener("click", () => { updateScore(mole) }));
+
+        function updateScore($mole) {
+            score++;
+            scoreBoard.innerText = score;
+
+            removeMole($mole)
+        }
+
+        let currentGame;
+        let timeElapsed;
+        let timer;
+        let moleTimer;
+        function startGame() {
+            document.querySelector("button").setAttribute("disabled", "");
+
+            setTimeout(() => {
+                score = 0;
+                scoreBoard.innerText = score;
+
+                timeElapsed = 0;
+
+                timer = setInterval(() => {
+                    timeElapsed++;
+
+                    $timer = document.querySelector(".timer");
+                    let remainingTime = 10 - timeElapsed;
+
+                    $timer.innerText = remainingTime;
+                    if(remainingTime <= 3) {
+                        $timer.classList.add("last-seconds");
+                    }
+                }, 1000);
+
+                upMole();
+            }, 1);
+        }
+
+        function upMole() {
+            const duration = Math.random().toFixed(2) * (1000 - 200) + 200;
+
+            const index = parseInt(Math.random() * holes.length);
+
+            const $mole = moles.item(index);
+            $mole.parentElement.classList.add("up");
+            
+            moleTimer = setTimeout(() => { removeMole($mole) }, duration);
+        }
+
+        function removeMole($mole) {
+            $mole.parentElement.classList.remove("up");
+
+            if(timeElapsed < 10) {
+                if(moleTimer) clearTimeout(moleTimer);
+
+                upMole();
+            } else {
+                clearInterval(timer);
+
+                $timer = document.querySelector(".timer");
+                $timer.classList.remove("last-seconds");
+
+                document.querySelector("button").removeAttribute("disabled");
+            }
+        }
     </script>
 </body>
 
