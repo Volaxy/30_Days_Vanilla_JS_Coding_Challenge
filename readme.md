@@ -26,7 +26,7 @@ Para acessar cada desafio, acesse o [link do menu de aplicações](https://30-da
 </div>
 
 ## :open_file_folder: Deploy da Aplicação :dash:
-[Aplicação Online]() - Site hospedado na plataforma do **Vercel**.
+[Aplicação Online](https://30-days-vanilla-js-coding-challenge-nif5qm5zo-volaxy.vercel.app/) - Site hospedado na plataforma do **Vercel**.
 
 ## :black_nib: Licença
 [Unlicense](https://unlicense.org)
