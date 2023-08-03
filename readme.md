@@ -4,7 +4,7 @@
   <!--Badges-->
 </p>
 
-> Status do Projeto: :building_construction: Em andamento
+> Status do Projeto: :heavy_check_mark: Concluido
 
 ## :bookmark_tabs: Tópicos
 [1. Descrição do Projeto](#descrição-do-projeto)<br>
@@ -17,6 +17,8 @@
   O projeto consiste na resolução de desafios diários usando somente o tripé do frontend (HMTL, CSS e JavaScript).
   Para acessar cada desafio, acesse o [link do menu de aplicações]().
 </p>
+
+> Link do Curso: [30 Days with JavaScript](https://javascript30.com/)
 
 ## :computer: Linguagens Usadas
 <div>

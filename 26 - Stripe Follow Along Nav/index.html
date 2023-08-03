@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Follow Along Nav</title>
     <link rel="icon" href="https://fav.farm/🔥" />
 </head>
@@ -253,6 +254,7 @@
         $coolItens.forEach($coolItem => {
             $coolItem.addEventListener("mouseover", () => {
                 $dropdownBackground.classList.add("open");
+                $coolItem.classList.add("trigger-enter-active");
 
                 const dropdownMeasures = $coolItem.lastElementChild.getBoundingClientRect();
 
