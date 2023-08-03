@@ -15,7 +15,7 @@
 ## :clipboard: Descrição do projeto
 <p align="justify">
   O projeto consiste na resolução de desafios diários usando somente o tripé do frontend (HMTL, CSS e JavaScript).
-  Para acessar cada desafio, acesse o [link do menu de aplicações]().
+  Para acessar cada desafio, acesse o [link do menu de aplicações](https://30-days-vanilla-js-coding-challenge.vercel.app/).
 </p>
 
 > Link do Curso: [30 Days with JavaScript](https://javascript30.com/)

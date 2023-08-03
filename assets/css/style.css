@@ -31,10 +31,7 @@ body {
         linear-gradient(225deg, hsl(318, 100%, 50%) 10%, hsla(64, 100%, 36%, 0)),
         linear-gradient(315deg, hsl(120, 100%, 50%) 10%, hsla(0, 100%, 36%, 0));
 
-    width: 80%;
-    min-height: 100vh;
-
-    margin: auto;
+    padding-top: 2rem;
 
     font-family: var(--default-font);
 }
@@ -61,21 +58,17 @@ a {
 
 /*============================== Page - Top to Bottom ==============================*/
 /* HEADER */
-.header {
-    margin-top: 4rem;
+.header__title {
+    font-size: 4rem;
+    text-align: center;
 }
 
-    .header__title {
-        font-size: 4rem;
-        text-align: center;
-    }
+.header__text {
+    margin-top: 2rem;
 
-    .header__text {
-        margin-top: 2rem;
-
-        font-size: 1.5rem;
-        text-align: center;
-    }
+    font-size: 1.5rem;
+    text-align: center;
+}
 
 /* INTRO */
 .intro__title {
@@ -100,6 +93,9 @@ a {
 
 /* PROJECTS */
 .projects {
+    width: 90%;
+
+    margin: auto;
     margin-top: 3rem;
 }
 
@@ -122,7 +118,13 @@ a {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
+
+        margin-bottom: 2rem;
     }
+
+        .projects > li {
+            margin-bottom: 0;
+        }
 
         .project__image {
             max-width: 20rem;
